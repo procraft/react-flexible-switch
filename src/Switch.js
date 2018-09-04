@@ -13,8 +13,6 @@ class Switch extends React.Component {
     this.onSlideStart = this.onSlideStart.bind(this)
     this.onMouseLeave = this.onMouseLeave.bind(this)
 
-    this.isTouchDevice = window['ontouchstart'] !== undefined
-
     this.state = { sliding: false, value: this.props.value }
   }
 
@@ -43,23 +41,13 @@ class Switch extends React.Component {
   }
 
   addListener() {
-    if (this.isTouchDevice) {
-      document.addEventListener(events.touch.start, this.onSlideStart, false)
-      document.addEventListener(events.touch.stop, this.onSlideEnd, false)
-    } else {
-      document.addEventListener(events.mouse.start, this.onSlideStart, false)
-      document.addEventListener(events.mouse.stop, this.onSlideEnd, false)
-    }
+    document.addEventListener(events.mouse.start, this.onSlideStart, false)
+    document.addEventListener(events.mouse.stop, this.onSlideEnd, false)
   }
 
   removeListener() {
-    if (this.isTouchDevice) {
-      document.removeEventListener(events.touch.start, this.onSlideStart, false)
-      document.removeEventListener(events.touch.stop, this.onSlideEnd, false)
-    } else {
-      document.removeEventListener(events.mouse.start, this.onSlideStart, false)
-      document.removeEventListener(events.mouse.stop, this.onSlideEnd, false)
-    }
+    document.removeEventListener(events.mouse.start, this.onSlideStart, false)
+    document.removeEventListener(events.mouse.stop, this.onSlideEnd, false)
   }
 
   onActivateButton() {
